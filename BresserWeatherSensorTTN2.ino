@@ -138,7 +138,8 @@
 
 
 #ifdef SSD1306_DISPLAY
-
+#include <iostream>
+#include <string>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
@@ -526,6 +527,9 @@ bool rtcSyncReq = false;
 
 /// Real time clock
 ESP32Time rtc;
+
+/// Date/time string
+char global_tbuf[24];
 
 /****************************************************************************\
 |
@@ -971,23 +975,18 @@ bool cMyLoRaWAN::GetAbpProvisioningInfo(AbpProvisioningInfo *pAbpInfo) {
   }
   return true;
 }
-#include <string>
-using namespace std;
+
+
 /// Print date and time (i.e. local time)
-string global_tbuf= "";
 void printDateTime(void) {
   struct tm timeinfo;
-  char tbuf[24];
 
   time_t tnow = rtc.getLocalEpoch();
   localtime_r(&tnow, &timeinfo);
-  strftime(tbuf, 23,  "%H:%M:%S %d-%m-%y", &timeinfo);
-  DEBUG_PRINTF("%s", tbuf);
-  std::string str(tbuf);
-  global_tbuf=tbuf;
-  
+  strftime(global_tbuf, 23,  "%H:%M:%S %d-%m-%y", &timeinfo);
+  DEBUG_PRINTF("%s", global_tbuf);
 }
-#include<iostream>
+
 
 /// Determine sleep duration and enter Deep Sleep Mode
 void prepareSleep(void) {
@@ -1515,8 +1514,8 @@ void cSensor::doUplink(void) {
     // If no weather sensor data was available (ws < 0)
     // some data cannot be displayed.
 
-    std::cout<<global_tbuf<<"  datetime"<< "\n";
-    const char *char_array = global_tbuf.c_str();    
+    // Note: Could simple use Serial.print() here
+    std::cout<<global_tbuf<<"  datetime"<< "\n";    
     //storedatetime(String);    
     display.setCursor(0,0);
     display.print("LORA WEATHER SENSOR ");
@@ -1525,7 +1524,7 @@ void cSensor::doUplink(void) {
     display.setCursor(0,20);
     display.print("Time is:");
     display.setCursor(0,30);
-    display.print(char_array);
+    display.print(global_tbuf);
     //Serial.print(tbuf2);        
     display.display();
     delay(10000);
