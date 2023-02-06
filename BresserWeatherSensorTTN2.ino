@@ -1502,7 +1502,8 @@ void cSensor::doUplink(void) {
     // be called. Reset busy flag.
     this->m_fBusy = false;
   }
-    displayWeatherData();
+    
+  displayWeatherData(ws);
 
 }
 
@@ -1525,12 +1526,11 @@ void cSensor::doUplink(void) {
   //   ws = weatherSensor.findType(SENSOR_TYPE_WEATHER1);
   // }
   //if (ws > -1) {
-  void displayWeatherData(void) {
-    int ws = weatherSensor.findType(SENSOR_TYPE_WEATHER0);
-  if (ws < 0) {
-    // Try to find SENSOR_TYPE_WEATHER1
-    ws = weatherSensor.findType(SENSOR_TYPE_WEATHER1);
-  }
+  void displayWeatherData(int ws) {
+    // FIXME:
+    // If no weather sensor data was available (ws < 0)
+    // some data cannot be displayed.
+
     std::cout<<global_tbuf<<"  datetime"<< "\n";
     const char *char_array = global_tbuf.c_str();    
     //storedatetime(String);    
