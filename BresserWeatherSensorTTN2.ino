@@ -989,22 +989,6 @@ void printDateTime(void) {
 }
 #include<iostream>
 
-//DEBUG_PRINTF_TS("%s", global_tbuf)
-//Serial.print("%s", global_tbuf);
-///store current datetime 
-String storedatetime (String){
-  struct tm timeinfo;
-  char tbuf2[24];
-
-  time_t tnow = rtc.getLocalEpoch();
-  localtime_r(&tnow, &timeinfo);
-  strftime(tbuf2, 23,  "%H:%M:%S %y-%m-%d", &timeinfo);
-  DEBUG_PRINTF("%s", tbuf2);
-  Serial.println(F(tbuf2));
-  return tbuf2;
-}
-//storedatetime();
-//storedatetime();
 /// Determine sleep duration and enter Deep Sleep Mode
 void prepareSleep(void) {
   uint32_t sleep_interval = prefs.sleep_interval;
