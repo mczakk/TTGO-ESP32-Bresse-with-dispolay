@@ -1535,15 +1535,18 @@ void cSensor::doUplink(void) {
     //display.print("LORA WEATHER SENDER ");
     //display.display();
     display.setCursor(0,0);
+    display.print("Rain Data:");
+    
+    display.setCursor(0,10);
     display.print("Hourly rain:");
-    display.setCursor(80, 0);
+    display.setCursor(80, 10);
     display.print(rainGauge.pastHour());display.print(" mm");
 
     
 
-    display.setCursor(0,10);
+    display.setCursor(0,20);
     display.print("Weekly rain:");
-    display.setCursor(80,10);
+    display.setCursor(80,20);
     display.print(rainGauge.pastHour());display.print(" mm");
 
     display.setCursor(0,30);
@@ -1561,7 +1564,7 @@ void cSensor::doUplink(void) {
     display.clearDisplay();
 
     display.setCursor(0,0);
-    display.print("White Lodge Weather"); 
+    display.print("XXXXXX Weather"); // add gauge location if required
 
     display.setCursor(0,10);
     display.print("Rain today:");
