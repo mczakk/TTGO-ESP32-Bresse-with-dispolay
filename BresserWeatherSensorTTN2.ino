@@ -138,7 +138,8 @@
 
 
 #ifdef SSD1306_DISPLAY
-
+#include <iostream>
+#include <string>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #define SCREEN_WIDTH 128  // OLED display width, in pixels
@@ -526,6 +527,9 @@ bool rtcSyncReq = false;
 
 /// Real time clock
 ESP32Time rtc;
+
+/// Date/time string
+char global_tbuf[24];
 
 /****************************************************************************\
 |
@@ -971,40 +975,19 @@ bool cMyLoRaWAN::GetAbpProvisioningInfo(AbpProvisioningInfo *pAbpInfo) {
   }
   return true;
 }
-#include <string>
-using namespace std;
+
+
 /// Print date and time (i.e. local time)
-string global_tbuf= "";
 void printDateTime(void) {
   struct tm timeinfo;
-  char tbuf[24];
 
   time_t tnow = rtc.getLocalEpoch();
   localtime_r(&tnow, &timeinfo);
-  strftime(tbuf, 23,  "%H:%M:%S %d-%m-%y", &timeinfo);
-  DEBUG_PRINTF("%s", tbuf);
-  std::string str(tbuf);
-  global_tbuf=tbuf;
-  
+  strftime(global_tbuf, 23,  "%H:%M:%S %d-%m-%y", &timeinfo);
+  DEBUG_PRINTF("%s", global_tbuf);
 }
-#include<iostream>
 
-//DEBUG_PRINTF_TS("%s", global_tbuf)
-//Serial.print("%s", global_tbuf);
-///store current datetime 
-String storedatetime (String){
-  struct tm timeinfo;
-  char tbuf2[24];
 
-  time_t tnow = rtc.getLocalEpoch();
-  localtime_r(&tnow, &timeinfo);
-  strftime(tbuf2, 23,  "%H:%M:%S %y-%m-%d", &timeinfo);
-  DEBUG_PRINTF("%s", tbuf2);
-  Serial.println(F(tbuf2));
-  return tbuf2;
-}
-//storedatetime();
-//storedatetime();
 /// Determine sleep duration and enter Deep Sleep Mode
 void prepareSleep(void) {
   uint32_t sleep_interval = prefs.sleep_interval;
@@ -1502,7 +1485,8 @@ void cSensor::doUplink(void) {
     // be called. Reset busy flag.
     this->m_fBusy = false;
   }
-    displayWeatherData();
+    
+  displayWeatherData(ws);
 
 }
 
@@ -1525,14 +1509,13 @@ void cSensor::doUplink(void) {
   //   ws = weatherSensor.findType(SENSOR_TYPE_WEATHER1);
   // }
   //if (ws > -1) {
-  void displayWeatherData(void) {
-    int ws = weatherSensor.findType(SENSOR_TYPE_WEATHER0);
-  if (ws < 0) {
-    // Try to find SENSOR_TYPE_WEATHER1
-    ws = weatherSensor.findType(SENSOR_TYPE_WEATHER1);
-  }
-    std::cout<<global_tbuf<<"  datetime"<< "\n";
-    const char *char_array = global_tbuf.c_str();    
+  void displayWeatherData(int ws) {
+    // FIXME:
+    // If no weather sensor data was available (ws < 0)
+    // some data cannot be displayed.
+
+    // Note: Could simple use Serial.print() here
+    std::cout<<global_tbuf<<"  datetime"<< "\n";    
     //storedatetime(String);    
     display.setCursor(0,0);
     display.print("LORA WEATHER SENSOR ");
@@ -1541,7 +1524,7 @@ void cSensor::doUplink(void) {
     display.setCursor(0,20);
     display.print("Time is:");
     display.setCursor(0,30);
-    display.print(char_array);
+    display.print(global_tbuf);
     //Serial.print(tbuf2);        
     display.display();
     delay(10000);
