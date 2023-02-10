@@ -379,6 +379,10 @@ public:
          * \returns Voltage [mV]
          */
   uint16_t getVoltage(ESP32AnalogRead &adc, uint8_t samples, float divider);
+  
+  // Index of weather station data
+  int wsIndex;
+  
 #endif
 
   /*!
@@ -669,6 +673,7 @@ void loop() {
 #ifdef SLEEP_EN
   if (sleepReq & !rtcSyncReq) {
     myLoRaWAN.Shutdown();
+    displayWeatherData(mySensor.wsIndex);
     prepareSleep();
   }
 #endif
@@ -1298,6 +1303,7 @@ void cSensor::doUplink(void) {
 
   // Try to find SENSOR_TYPE_WEATHER0
   int ws = weatherSensor.findType(SENSOR_TYPE_WEATHER0);
+  
   if (ws < 0) {
     // Try to find SENSOR_TYPE_WEATHER1
     ws = weatherSensor.findType(SENSOR_TYPE_WEATHER1);
@@ -1486,8 +1492,9 @@ void cSensor::doUplink(void) {
     this->m_fBusy = false;
   }
     
-  displayWeatherData(ws);
-
+  //displayWeatherData(ws);
+  // Copy index to weather station data from local variable into member variable for access by displayWeatherData()
+  wsIndex = ws;
 }
 
 
