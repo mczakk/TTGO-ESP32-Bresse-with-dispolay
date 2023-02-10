@@ -380,9 +380,6 @@ public:
          */
   uint16_t getVoltage(ESP32AnalogRead &adc, uint8_t samples, float divider);
   
-  // Index of weather station data
-  int wsIndex;
-  
 #endif
 
   /*!
