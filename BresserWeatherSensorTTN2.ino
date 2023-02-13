@@ -355,6 +355,9 @@ public:
      */
   float getTemperature(void);
 
+  /// Index into sensor data structure
+  int wsIndex;
+
 #ifdef ADC_EN
   /*!
          * \fn getVoltage
