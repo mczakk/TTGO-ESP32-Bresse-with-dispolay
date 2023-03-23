@@ -184,7 +184,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire);
 // Pin mapping for ESP32 (MCCI Arduino LoRaWAN Library)
 // Note: Pin mapping for BresserWeatherSensorReceiver is done in WeatherSensorCfg.h!
 // SPI2 is used on ESP32 per default! (e.g. see https://github.com/espressif/arduino-esp32/tree/master/variants/doitESP32devkitV1)
-#if defined(ARDUINO_TTGO_LoRa32_V2) // define my board in IDFE as board revision V2
+#if defined(ARDUINO_TTGO_LoRa32_V2) // define my board in IDE as board revision V2
 // https://github.com/espressif/arduino-esp32/blob/master/variants/ttgo-lora32-v1/pins_arduino.h
 // http://www.lilygo.cn/prod_view.aspx?TypeId=50003&Id=1130&FId=t3:50003:3
 // https://github.com/Xinyuan-LilyGo/TTGO-LoRa-Series
