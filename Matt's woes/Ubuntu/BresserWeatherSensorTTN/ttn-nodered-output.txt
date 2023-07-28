@@ -1,0 +1,140 @@
+MQTT recieved by Node-Red
+
+{"end_device_ids":{"device_id":"bresseresp32","application_ids":{"application_id":"bresserttn"},"dev_eui":"70B3D57ED00599E7",
+"join_eui":"70B3D57ED00599E7","dev_addr":"260B3B8F"},"correlation_ids":["as:up:01GQD3MC9TMMBQ0VRGCKEGM906","gs:conn:01GQCJY6DC3GAYH6ZEK67T0E0W",
+"gs:up:host:01GQCJY6DK79FBY1SYBGS77KBG","gs:uplink:01GQD3MC30E3PMXF1GR6QZQK5V","ns:uplink:01GQD3MC31KN8EGHJDWXRR1GY6",
+"rpc:/ttn.lorawan.v3.GsNs/HandleUplink:01GQD3MC31GGYG48P9VWE4BYZY","rpc:/ttn.lorawan.v3.NsAs/HandleUplink:01GQD3MC9S9YN1X525JKC8PDCA"],
+"received_at":"2023-01-22T16:05:24.921359121Z","uplink_message":{"session_key_id":"AYXaNDlZ1G1Ly49nmUL+FQ==","f_port":1,"f_cnt":2,
+"frm_payload":"BTUFOAMB4FAAAAAAbAxnZmNEHAEcAQAAAAAAAAAAAAAAAAAAAAA=","decoded_payload":
+{"bytes":{"air_temp_c":"4.8","battery_v":284,"humidity_%":80,"id":939865349,"rain_day":"0.0","rain_hr":"0.0","rain_mm":"909.6","rain_mon":"0.0",
+"rain_week":"0.0",
+"status":{"ble_ok":false,"res0":false,"res1":false,"res2":false,"s1_batt_ok":false,"s1_dec_ok":fals...
+
+Event details from TTN
+{
+  "name": "as.up.data.forward",
+  "time": "2023-01-22T16:15:13.077657143Z",
+  "identifiers": [
+    {
+      "device_ids": {
+        "device_id": "bresseresp32",
+        "application_ids": {
+          "application_id": "bresserttn"
+        },
+        "dev_eui": "70B3D57ED00599E7",
+        "join_eui": "70B3D57ED00599E7",
+        "dev_addr": "260B3B8F"
+      }
+    }
+  ],
+  "data": {
+    "@type": "type.googleapis.com/ttn.lorawan.v3.ApplicationUp",
+    "end_device_ids": {
+      "device_id": "bresseresp32",
+      "application_ids": {
+        "application_id": "bresserttn"
+      },
+      "dev_eui": "70B3D57ED00599E7",
+      "join_eui": "70B3D57ED00599E7",
+      "dev_addr": "260B3B8F"
+    },
+    "correlation_ids": [
+      "as:up:01GQD46ANEJX0991RV62A7CGZC",
+      "gs:conn:01GQCJY6DC3GAYH6ZEK67T0E0W",
+      "gs:up:host:01GQCJY6DK79FBY1SYBGS77KBG",
+      "gs:uplink:01GQD46AEX2ZFVNTX9R24C4KGN",
+      "ns:uplink:01GQD46AF08HXY9JACRMV6VF8J",
+      "rpc:/ttn.lorawan.v3.GsNs/HandleUplink:01GQD46AEZF6RW9F4MG64WDB73",
+      "rpc:/ttn.lorawan.v3.NsAs/HandleUplink:01GQD46ANDWYTVZHGQ538WZMYQ"
+    ],
+    "received_at": "2023-01-22T16:15:13.069643551Z",
+    "uplink_message": {
+      "session_key_id": "AYXaNDlZ1G1Ly49nmUL+FQ==",
+      "f_port": 1,
+        f_cnt": 4,
+      "frm_payload": "BTUFOAMB4FAHAAcACAdnZmNEHAEcAQAAAAAAAAAAAAAAAAAAAAA=",
+      "decoded_payload": {
+        "bytes": {
+          "air_temp_c": "4.8",
+          "battery_v": 284,
+          "humidity_%": 80,
+          "id": 939865349,
+          "rain_day": "0.0",
+          "rain_hr": "0.0",
+          "rain_mm": "909.6",
+          "rain_mon": "0.0",
+          "rain_week": "0.0",
+          "status": {
+            "ble_ok": false,
+            "res0": false,
+            "res1": false,
+            "res2": false,
+            "s1_batt_ok": false,
+            "s1_dec_ok": false,
+            "ws_batt_ok": true,
+            "ws_dec_ok": true
+          },
+          "supply_v": 284,
+          "wind_avg_meter_sec": "0.7",
+          "wind_direction_deg": "180.0",
+          "wind_gust_meter_sec": "0.7"
+        }
+      },
+      "rx_metadata": [
+        {
+          "gateway_ids": {
+            "gateway_id": "matts-test-gw",
+            "eui": "58A0CBFFFE804A09"
+          },
+          "time": "2023-01-22T16:15:12.630086898Z",
+          "timestamp": 910856363,
+          "rssi": -255,
+          "channel_rssi": -255,
+          "snr": 7.75,
+          "uplink_token": "ChsKGQoNbWF0dHMtdGVzdC1ndxIIWKDL//6ASgkQq6GqsgMaDAiQwrWeBhCys/SaAyD4t5SawY4E",
+          "received_at": "2023-01-22T16:15:12.720109634Z"
+        }
+      ],
+      "settings": {
+        "data_rate": {
+          "lora": {
+            "bandwidth": 125000,
+            "spreading_factor": 7,
+            "coding_rate": "4/5"
+          }
+        },
+        "frequency": "868500000",
+        "timestamp": 910856363,
+        "time": "2023-01-22T16:15:12.630086898Z"
+      },
+      "received_at": "2023-01-22T16:15:12.864057551Z",
+      "confirmed": true,
+      "consumed_airtime": "0.102656s",
+      "network_ids": {
+        "net_id": "000013",
+        "tenant_id": "ttn",
+        "cluster_id": "eu1",
+        "cluster_address": "eu1.cloud.thethings.network"
+      }
+    }
+  },
+  "correlation_ids": [
+    "as:up:01GQD46ANEJX0991RV62A7CGZC",
+    "gs:conn:01GQCJY6DC3GAYH6ZEK67T0E0W",
+    "gs:up:host:01GQCJY6DK79FBY1SYBGS77KBG",
+    "gs:uplink:01GQD46AEX2ZFVNTX9R24C4KGN",
+    "ns:uplink:01GQD46AF08HXY9JACRMV6VF8J",
+    "rpc:/ttn.lorawan.v3.GsNs/HandleUplink:01GQD46AEZF6RW9F4MG64WDB73",
+    "rpc:/ttn.lorawan.v3.NsAs/HandleUplink:01GQD46ANDWYTVZHGQ538WZMYQ"
+  ],
+  "origin": "ip-10-100-15-91.eu-west-1.compute.internal",
+  "context": {
+    "tenant-id": "CgN0dG4="
+  },
+  "visibility": {
+    "rights": [
+      "RIGHT_APPLICATION_TRAFFIC_READ"
+    ]
+  },
+  "unique_id": "01GQD46ANN80QENYMAD7AQJ58Z"
+}
